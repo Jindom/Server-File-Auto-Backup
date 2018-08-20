@@ -29,7 +29,7 @@ tar -cvf $dir1"_"$date.tar $dir1 >> /dev/null
 
 echo -e "\033[31m +++++开始上传网页文件数据+++++ \033[0m"
 
-ftp -A -n<<EOF
+ftp -n<<EOF
 open $FTPIP $FTPPORT
 user $USERPASSWD
 cd $sdir
@@ -44,7 +44,7 @@ rm -rf $dir1"_"$date.tar
 echo -e "\033[31m +++++开始备份数据库数据+++++ \033[0m"
 mysqldump -u$databaseuser -p$databasepass -h127.0.0.1 $databasename1 > /$databasename1"_"$date.dump
 echo -e "\033[31m +++++开始上传数据库数据+++++ \033[0m"
-ftp -A -n<<EOF
+ftp -n<<EOF
 open $FTPIP $FTPPORT
 user $USERPASSWD
 cd $sdir
@@ -84,6 +84,7 @@ release="centos"
 systemPackage="yum"
 fi
 $systemPackage -y install ftp
+$systemPackage -y install mysqldump
 
 echo "请输入自动备份任务的执行周期(以天为单位):"
 read -p "自动备份周期天数:" day
@@ -95,7 +96,7 @@ echo "请输入你的FTP服务器的用户名和密码(例如admin password):"
 read -p "FTP用户名密码:" USERPASSWD
 echo "请输入你的数据库用户名(例如root):"
 read -p "数据库用户名:" databaseuser
-echo "请输入你的数据库密码(例如passowrd):"
+echo "请输入你的数据库密码(例如password):"
 read -p "数据库密码:" databasepass
 echo "请输入你想要保存文档到FTP服务器的何位置(例如/share/backup):"
 read -p "FTP服务器路径:" sdir
