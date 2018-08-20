@@ -1,30 +1,5 @@
 #!/bin/bash
 
-echo -e "\033[32m +++++安装前置环境+++++ \033[0m"
-if [[ -f /etc/redhat-release ]]; then
-release="centos"
-systemPackage="yum"
-elif grep -Eqi "debian" /etc/issue; then
-release="debian"
-systemPackage="apt"
-elif grep -Eqi "ubuntu" /etc/issue; then
-release="ubuntu"
-systemPackage="apt"
-elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
-release="centos"
-systemPackage="yum"
-elif grep -Eqi "debian" /proc/version; then
-release="debian"
-systemPackage="apt"
-elif grep -Eqi "ubuntu" /proc/version; then
-release="ubuntu"
-systemPackage="apt"
-elif grep -Eqi "centos|red hat|redhat" /proc/version; then
-release="centos"
-systemPackage="yum"
-fi
-$systemPackage -y install ftp
-
 echo "+------------------------------------------------------------------------+"
 echo "|                    Server Data Auto Backup Script                      |"
 echo "+------------------------------------------------------------------------+"
@@ -85,6 +60,30 @@ echo -e "\033[32m +++++日志已保存到/backup/+++++ \033[0m"
 
 
 else
+echo -e "\033[32m +++++安装前置环境+++++ \033[0m"
+if [[ -f /etc/redhat-release ]]; then
+release="centos"
+systemPackage="yum"
+elif grep -Eqi "debian" /etc/issue; then
+release="debian"
+systemPackage="apt"
+elif grep -Eqi "ubuntu" /etc/issue; then
+release="ubuntu"
+systemPackage="apt"
+elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
+release="centos"
+systemPackage="yum"
+elif grep -Eqi "debian" /proc/version; then
+release="debian"
+systemPackage="apt"
+elif grep -Eqi "ubuntu" /proc/version; then
+release="ubuntu"
+systemPackage="apt"
+elif grep -Eqi "centos|red hat|redhat" /proc/version; then
+release="centos"
+systemPackage="yum"
+fi
+$systemPackage -y install ftp
 
 echo "请输入自动备份任务的执行周期(以天为单位):"
 read -p "自动备份周期天数:" day
