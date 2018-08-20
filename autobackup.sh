@@ -29,7 +29,7 @@ tar -cvf $dir1"_"$date.tar $dir1 >> /dev/null
 
 echo -e "\033[31m +++++开始上传网页文件数据+++++ \033[0m"
 
-ftp -n<<EOF
+ftp -A -n<<EOF
 open $FTPIP $FTPPORT
 user $USERPASSWD
 cd $sdir
@@ -44,7 +44,7 @@ rm -rf $dir1"_"$date.tar
 echo -e "\033[31m +++++开始备份数据库数据+++++ \033[0m"
 mysqldump -u$databaseuser -p$databasepass -h127.0.0.1 $databasename1 > /$databasename1"_"$date.dump
 echo -e "\033[31m +++++开始上传数据库数据+++++ \033[0m"
-ftp -n<<EOF
+ftp -A -n<<EOF
 open $FTPIP $FTPPORT
 user $USERPASSWD
 cd $sdir
