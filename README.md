@@ -1,2 +1,2 @@
 # Server-File-Auto-Backup
-auto upload the specified file and database to FTP server
+auto compress the specified file and the specified database then upload to the specified FTP server
